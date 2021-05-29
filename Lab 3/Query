@@ -1,0 +1,8 @@
+Queries:
+1) SELECT DISTINCT P.pname FROM parts P, catalog C WHERE P.pid = C.pid;
+2) SELECT S.sname FROM supplier S WHERE NOT EXISTS ((SELECT P.pid FROM parts P) EXCEPT(SELECT C.pid FROM catalog C WHERE C.sid = S.sid ));
+3) SELECT S.sname FROM supplier S WHERE NOT EXISTS((SELECT P.pid FROM parts P WHERE P.color='red') EXCEPT (SELECT C.pid FROM catalog C, parts P WHERE C.sid = S.sid AND C.pid = P.pid AND P.color = 'red'));
+4) SELECT DISTINCT pname FROM catalog x, parts y, supplier z WHERE(z.sname='Ananad pvt ltd' AND z.sid=x.sid);
+5)  SELECT DISTINCT c.sid FROM catalog c WHERE c.cost>(SELECT AVG(c1.cost) FROM catalog c1 WHERE c1.pid=c.pid);
+6) SELECT P.pid, S.sname FROM parts P, supplier S, catalog C WHERE C.pid = P.pid AND C.sid = S.sid AND C.cost = (SELECT MAX(C1.cost) FROM catalog C1 WHERE C1.pid = P.pid);
+7) SELECT DISTINCT c.sid FROM catalog c WHERE NOT EXISTS(SELECT * FROM parts p WHERE p.pid=c.pid and p.color<>'red');
