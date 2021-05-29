@@ -64,4 +64,3 @@ Querry 6:
 SELECT sname FROM student where snum not in(SELECT snum from enrolled);
 Querry 7:
 select s.age, s.level from student s group by s.age,s.level having s.level in (select s1.level from student s1 where s1.age = s.age group by s1.level,s1.age having count(*) >= all (select count(*) from student s2 where s1.age = s2.age group by s2.level,s2.age))
-© 2021 GitHub, Inc.
