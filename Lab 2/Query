@@ -1,0 +1,17 @@
+Query 3) SELECT costumername
+            FROM depositor d,bankaccount a
+            WHERE d.accno=a.accno
+            AND a.branchname='SBI_ResidencyRd'
+            GROUP BY d.costumername
+            HAVING COUNT(d.costumername)>=2
+Query 4) SELECT d.costumername
+             FROM bankaccount a,branch b,depositor d
+             WHERE b.branchname=a.branchname AND
+             a.accno=d.accno AND
+             b.branchcity='Banglore'
+             GROUP BY d.costumername
+             HAVING COUNT(distinct b.branchname)=(
+                SELECT COUNT(branchname)
+                FROM branch
+                WHERE branchcity='Delhi')
+Query 5) DELETE FROM bankaccount WHERE branchname IN(SELECT branchname FROM branch WHERE branchcity='Delhi');
