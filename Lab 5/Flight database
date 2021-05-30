@@ -128,4 +128,9 @@ Find the names of aircraft such that all pilots certified to operate them have s
      FROM flight f
      WHERE f.frm='Bangalore'
      AND f.too='Delhi');
-
+Query 7:
+A customer wants to travel from Madison to New York with no more than two changes of flight. List the  choice of departure times from Madison if the customer wants to arrive in New York by 6 p.m.
+SELECT DISTINCT f1.* from flights f1,flights f2 where (f1.frm = "Bangalore" and f1.too = "Frankfurt" AND hour(f1.arrives)<6) or (f1.frm = "Bangalore" and f2.too = "Frankfurt" and f1.too=f2.frm and hour(f2.arrives)<6);
+Query 8:
+Print the name and salary of every non-pilot whose salary is more than the average salary for pilots.
+(SELECT ename FROM employee WHERE salary>(SELECT avg(salary) FROM employee) EXCEPT (SELECT DISTINCT e2.ename from employee e2, certified c WHERE c.eid=e2.eid))
